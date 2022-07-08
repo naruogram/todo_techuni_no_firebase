@@ -22,6 +22,7 @@ class TodoListPage extends HookConsumerWidget {
               Icons.add,
             ),
             onPressed: () async {
+              // ここで追加
               final String value = await showTextFieldDialog(context: context);
               await notifier.addTodo(description: value);
             },
@@ -36,8 +37,10 @@ class TodoListPage extends HookConsumerWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                       onLongPress: () async {
+                        // ここでは削除メソッドを使いたかったので、無理やり追加
                         final bool isDeleted =
                             await showConfirmDialog(context: context);
+                        // ダイアログの結果で削除するか決める
                         isDeleted == true
                             ? await notifier.deleteTodo(
                                 data: state.todoList[index],
